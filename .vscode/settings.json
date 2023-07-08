@@ -2,6 +2,8 @@
     "files.associations": {
         "iomanip": "cpp",
         "iostream": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "cmath": "cpp",
+        "iosfwd": "cpp"
     }
 }
