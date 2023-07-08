@@ -12,13 +12,14 @@ int main()
         cin >> distance[i];
     }
     sort(distance.begin(),distance.end());
-    int cnt=0;
-    for (int i = 1; i <= n; i++)
+    int i=1;
+    for ( ; i <= n; i++)
     {
-        if (distance[n-i]>i)
+        if (distance[n-i]<=i)
         {
-            cnt++;
+            break;
         }
     }
-    cout<<cnt;
+    //为什么cout<<i-1;不放在break上，因为当每天路程都大于i时触发不了if (distance[n-i]<=i)中的代码段
+    cout<<i-1;
 }
