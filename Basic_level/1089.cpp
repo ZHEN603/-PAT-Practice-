@@ -1,119 +1,42 @@
 #include<iostream>
 #include<map>
 #include<cmath>
-#include<algorithm>
-#include<iomanip>
-#include<string>
 #include<vector>
-#include<set>
 using namespace std;
-
 int main()
 {
-    int n,cnt=0;
-    string t;
-    vector<string> data,v,vi;
-    set<int> wrong;
-    vector<int> w;
-    vector<pair<int,int>> res;
+    int n;
     cin>>n;
-    for (int i = 0; i < n; i++)
+    vector<int> v(n+1),lie;
+    map<int,int> m;
+    for (int i = 1; i <= n; i++)
     {
-        cin>>t;
-        data.push_back(t);
+        cin>>v[i];
     }
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int k = i+1; k <= n; k++)
         {
-            
-            if (j!=i)
+            m.clear();
+            m[i]=1;
+            m[k]=1;
+            lie.clear();
+            for (int j = 1; j <= n; j++)
             {
-                for (int x = 0; x < n; x++)
+                if ((v[j]<0&&m[abs(v[j])]==0)||(v[j]>=0&&m[abs(v[j])]==1))
                 {
-                    if (x!=i&&x!=j)
-                    {
-                        v=data;
-                        v[i][0]=v[i][0]=='+'?'-':'+';
-                        v[x][0]=v[x][0]=='+'?'-':'+';
-                        w.clear();
-                        wrong.clear();
-                        for (int k = 0; k < n; k++)
-                        {
-                            if (v[k][0]=='-')
-                            {
-                                wrong.insert(v[k][1]-'0');
-                            }
-                        }
-                        w.assign(wrong.begin(),wrong.end());
-                        if (w.size()==2&&((w[0]==i&&w[1]==j)||(w[0]==j&&w[1]==i)))
-                        {
-                            if ((w[0]==i&&w[1]==j)||(w[0]==j&&w[1]==i))
-                            {
-                                continue;
-                            }
-                            else if (w.size()==1&&(w[0]==i||w[0]==j||w[1]==i||w[1]==j))
-                            {
-                                res.push_back(make_pair(w[0],w[1]));
-                            }
-                        }
-                    }
-                    
+                    lie.push_back(j);
                 }
             }
-            
-            if (j!=i)
+            if (lie.size()==2)
             {
-                v=data;
-                v[i][0]=v[i][0]=='+'?'-':'+';
-                v[j][0]=v[j][0]=='+'?'-':'+';
-                w.clear();
-                wrong.clear();
-                for (int k = 0; k < n; k++)
+                if ((m[lie[0]]==1&&m[lie[1]]==0)||(m[lie[0]]==0&&m[lie[1]]==1))
                 {
-                    if (v[k][0]=='-')
-                    {
-                        wrong.insert(v[k][1]-'0');
-                    }
-                }
-                w.assign(wrong.begin(),wrong.end());
-                if (w.size()<=2)
-                {
-                    if ((w[0]==i&&w[1]==j)||(w[0]==j&&w[1]==i))
-                    {
-                        continue;
-                    }
-                    else if (w[0]==i||w[0]==j||w[1]==i||w[1]==j)
-                    {
-                        res.push_back(make_pair(w[0],w[1]));
-                    }
-                }
-            }
-            
-            v=data;
-            v[i][0]=v[i][0]=='+'?'-':'+';
-            v[j][0]=v[j][0]=='+'?'-':'+';
-            w.clear();
-            wrong.clear();
-            for (int k = 0; k < n; k++)
-            {
-                if (v[k][0]=='-')
-                {
-                    wrong.insert(v[k][1]-'0');
-                }
-            }
-            w.assign(wrong.begin(),wrong.end());
-            if (w.size()<=2)
-            {
-                if ((w[0]==i&&w[1]==j)||(w[0]==j&&w[1]==i))
-                {
-                    continue;
-                }
-                else if (w[0]==i||w[0]==j||w[1]==i||w[1]==j)
-                {
-                    res.push_back(make_pair(w[0],w[1]));
+                    cout<<i<<" "<<k<<endl;
+                    return 0;
                 }
             }
         }
     }
+    cout<<"No Solution"<<endl;
 }
