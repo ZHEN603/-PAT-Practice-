@@ -1,11 +1,5 @@
 #include<iostream>
-#include<map>
 #include<cmath>
-#include<algorithm>
-#include<iomanip>
-#include<string>
-#include<vector>
-#include<set>
 using namespace std;
 bool is_prime(int n)
 {
