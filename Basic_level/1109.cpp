@@ -1,17 +1,13 @@
 #include<iostream>
-#include<map>
-#include<cmath>
-#include<algorithm>
-#include<iomanip>
 #include<string>
 #include<vector>
-#include<set>
 using namespace std;
 int main()
 {
     vector<vector<string>> alphabat(26,vector<string>(7));
+    vector<string> res;
     string sentence,ans="";
-    int flag=1;
+    int flag=0,line=0;
     for (int i = 0; i < 26; i++)
     {
         for (int j = 0; j < 7; j++)
@@ -19,7 +15,8 @@ int main()
             cin>>alphabat[i][j];
         }
     }
-    cin>>sentence;
+    cin.ignore();
+    getline(cin,sentence);
     for (int i = 0; i < sentence.size(); i++)
     {
         if (sentence[i]<='Z'&&sentence[i]>='A')
@@ -29,21 +26,32 @@ int main()
         }
         else
         {
-            if (flag==0)
+            if (flag)
             {
-                continue;
+                res.push_back(ans);
+                ans="";
             }
-            for (int j = 0; j < 7; j++)
-            {
-                for (int k = 0; k < ans.size(); k++)
-                {
-                    cout<<(k!=0?" ":"")<<alphabat[ans[k]-'A'][j];
-                }
-                cout<<endl;
-            }
-            ans="";
             flag=0;
-            if (i!=sentence.size()-1)
+        }
+    }
+    if (ans!="")
+    {
+        res.push_back(ans);
+    }
+    for (int i = 0; i < res.size(); i++)
+    {
+        if (i!=0)
+        {
+            cout<<endl;
+            cout<<endl;
+        }
+        for (int j = 0; j < 7; j++)
+        {
+            for (int k = 0; k < res[i].size(); k++)
+            {
+                cout<<(k!=0?" ":"")<<alphabat[res[i][k]-'A'][j];
+            }
+            if (j!=6)
             {
                 cout<<endl;
             }
