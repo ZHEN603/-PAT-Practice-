@@ -1,11 +1,5 @@
 #include<iostream>
-#include<map>
 #include<cmath>
-#include<algorithm>
-#include<iomanip>
-#include<string>
-#include<vector>
-#include<set>
 using namespace std;
 bool isPrime(int n)
 {
@@ -17,7 +11,7 @@ bool isPrime(int n)
     {
         return false;
     }
-    for (int i = 5; i < sqrt(n); i+=6)
+    for (int i = 5; i <= sqrt(n); i+=6)
     {
         if (n%i==0||n%(i+2)==0)
         {
@@ -30,12 +24,12 @@ int main()
 {
     int n,cnt=0;
     cin>>n;
-    for (int i = 2; i <= n-2; i++)
+    for (int i = 3; i <= n; i++)
     {
-        if (isPrime(i)&&isPrime(i+2))
+        if (isPrime(i)&&isPrime(i-2)&&!isPrime(i-1))
         {
             cnt++;
         }
     }
-    cout<<cnt;
+    cout<<cnt<<endl;
 }
